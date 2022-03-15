@@ -19,3 +19,20 @@ We suggest that you begin by typing:
   npm start
 
 Happy hacking!
+
+- I am very much a beginner at git. I set up the site's repository at https://github.com/luivader/contact-manager. I don't know a proper workflow for collaboration but I wanted to at least test one way we could all work on stuff. This seems to work, but I've never used git collaboratively. If any of you have, and this is super wrong, we should definitely change it
+new users (do once):
+  git clone https://github.com/luivader/contact-manager.git
+  cd contact-manager
+  git add -A 
+  git commit -m "message" 
+  git push -u origin main (probably need to authenticate?)
+
+subsequent workflow (in the contact-manager directory, the one with the .git):
+  git pull origin main 
+  git add -A 
+  git commit -m "message" 
+  git push -u origin main
+
+to publish to the live site, on remote machine (inside of  /var/www/):
+  git pull origin main
