@@ -10,21 +10,16 @@ import './App.css';
 import LoginPage from './pages/LoginPage';
 import CssPage from './pages/CssPage';
 
+
 function App()
 {
   return (
     <Router>
       <Routes>
-        <Route path="/" exact>
-          <LoginPage />
-        </Route>
-        <Route path="/car" exact>
-          <CssPage />
-        </Route>
-        <Navigate to="/" />
+        <Route exact path="/" element={<LoginPage />} />
+        <Route exact path="/car" element={<CssPage />} />
       </Routes>
     </Router>
-    // <LoginPage />
   );
 };
 
