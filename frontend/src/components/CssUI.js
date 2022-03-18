@@ -13,7 +13,7 @@ function CssUI()
         <div id="accessUIDiv">
             <br />
             <input type="text" id="searchText" placeholder="Car to search for" />
-            <button type="button" id="searchCarButton" class="buttons" onClick={seachCar}> Search Car </button><br />
+            <button type="button" id="searchCarButton" class="buttons" onClick={searchCar}> Search Car </button><br />
             <span id="carSearchResult"></span>
             <p id="carList"></p>
         </div>
