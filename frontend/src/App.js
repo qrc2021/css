@@ -15,13 +15,13 @@ function App()
   return (
     <Router>
       <Routes>
-        <Route path="/" exact>
+        <Route path="/login">
           <LoginPage />
         </Route>
-        <Route path="/css" exact>
+        <Route path="/css">
           <CssPage />
         </Route>
-        <Navigate to="/" />
+        {/* <Navigate to="/" /> */}
       </Routes>
     </Router>
   );
