@@ -16,26 +16,17 @@ import SignupPage from './pages/SignupPage';
 
 function App()
 {
-  return (
-    
+  return ( 
+    <AuthProvider>
       <Container 
         className="d-flex align-items-center justify-content-center"
         style={{ minHeight: "100vh" }}
         >
-        <div className="w-100" style={{ maxWidth: "400px" }}>
-          {/* <Router>
-            <Routes>
-              <Route exact path="/" element={<LoginPage />} />
-              <Route exact path="/car" element={<CssPage />} />
-              <Route exact path="/register" element={<RegisterPage />} />
-              <Route exact path="/forgot" element={<ForgotPage />} />
-            </Routes>
-          </Router> */}
-          
+        <div className="w-100" style={{ maxWidth: "400px" }}>          
           <SignupPage />
         </div>
       </Container>
-    
+    </AuthProvider>
   );
 };
 
