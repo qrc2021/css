@@ -1,52 +1,54 @@
-import React, {useState} from 'react';
+import React, { useRef } from 'react';
 import { useNavigate } from "react-router-dom";
-import { Button } from 'react-bootstrap';
-import LoginPage from '../pages/LoginPage';
+import { Button, Card, Form } from 'react-bootstrap';
 
-function Register()
+
+export default function Register()
 {
-    let navigate = useNavigate();
-
-    const [rFirstName, setFirstName] = useState('');
-    const [rLastName, setLastName] = useState('');
-    const [rEmail, setEmail] = useState('');
-    const [rPassword, setPassword] = useState('');
-    const [rPasswordVerify, setVerification] = useState('');
-    const [rUnit, setUnit] = useState('');
-
-
-    // Register 
-    const register = async (event) =>
-    {
-        event.preventDefault();
-
-        alert('doIt()' + rFirstName.value + ' ' + rPassword.value);
-    };
-
-    // Go back to login page
-    const back = () => 
-    {
-        let path = '/';
-        navigate(path);
-    }
-
+    const firstNameRef = useRef();
+    const lastNameRef = useRef();
+    const emailRef = useRef();
+    const serialRef = useRef();
+    const passwordRef = useRef();
+    const passwordConfirmRef = useRef();
 
     return(
-        <div id="registerDiv">
-            <form onSubmit={register}>
-                <span id="registerResult"></span><br />
-                <input type="text" id="rFirstName" placeholder="First Name" ref={(c) => rFirstName = c}/><br />
-                <input type="text" id="rLastName" placeholder="Last Name" ref={(c) => rLastName = c}/><br />
-                <input type="text" id="rEmail" placeholder="Email" ref={(c) => rEmail = c}/><br />
-                <input type="text" id="rUnit" placeholder="CSS Serial Number" ref={(c) => rUnit = c}/><br />
-                <input type="password" id="rPassword" placeholder="Password" ref={(c) => rPassword = c}/><br />
-                <input type="password" id="rPasswordVerify" placeholder="Verify Password" ref={(c) => rPasswordVerify = c}/><br />
-                <input type="submit" id="registerButton" class="buttons" value = "Register" onClick={register} />
-            </form>
-            <Button onClick={back}>Back</Button>
-            <span id="registerResult"></span>
-        </div>
-    );
-};
-
-export default Register;
+        <>
+            <Card>
+                <Card.Body>
+                    <h2> Register</h2>
+                    <Form>
+                        <Form.Group id="firstName">
+                            <Form.Label>First Name</Form.Label>
+                            <Form.Control type="text" ref={firstNameRef} required />
+                        </Form.Group>
+                        <Form.Group id="lastName">
+                            <Form.Label>Last Name</Form.Label>
+                            <Form.Control type="text" ref={lastNameRef} required />
+                        </Form.Group>
+                        <Form.Group id="email">
+                            <Form.Label>Email</Form.Label>
+                            <Form.Control type="email" ref={emailRef} required />
+                        </Form.Group>
+                        <Form.Group id="serialNum">
+                            <Form.Label>CSS Serial Number</Form.Label>
+                            <Form.Control type="text" ref={serialRef} required />
+                        </Form.Group>
+                        <Form.Group id="password">
+                            <Form.Label>Password</Form.Label>
+                            <Form.Control type="password" ref={passwordRef} required />
+                        </Form.Group>
+                        <Form.Group id="password-confirm">
+                            <Form.Label>Confirm Password</Form.Label>
+                            <Form.Control type="password" ref={passwordConfirmRef} required />
+                        </Form.Group>
+                        <Button className="w-100" type="submit"> Register</Button>
+                    </Form>
+                </Card.Body>
+            </Card>
+            <div className="w-100 text-center mt-2">
+                Already have an account? Log in
+            </div>
+        </>
+    )
+}
