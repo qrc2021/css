@@ -6,7 +6,7 @@ import LoginPage from '../pages/LoginPage';
 function Register()
 {
     var rFirstName; // input field persistence
-    var rLastName, rEmail, rPassword, rPasswordVerify;
+    var rLastName, rEmail, rPassword, rPasswordVerify, rUnit;
     let navigate = useNavigate();
 
     const [message, setMessage] = useState('');
@@ -34,6 +34,7 @@ function Register()
                 <input type="text" id="rFirstName" placeholder="First Name" ref={(c) => rFirstName = c}/><br />
                 <input type="text" id="rLastName" placeholder="Last Name" ref={(c) => rLastName = c}/><br />
                 <input type="text" id="rEmail" placeholder="Email" ref={(c) => rEmail = c}/><br />
+                <input type="text" id="rUnit" placeholder="CSS Serial Number" ref={(c) => rUnit = c}/><br />
                 <input type="password" id="rPassword" placeholder="Password" ref={(c) => rPassword = c}/><br />
                 <input type="password" id="rPasswordVerify" placeholder="Verify Password" ref={(c) => rPasswordVerify = c}/><br />
                 <input type="submit" id="registerButton" class="buttons" value = "Register" onClick={register} />
