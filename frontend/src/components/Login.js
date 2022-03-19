@@ -6,12 +6,23 @@ function Login()
     var loginPassword; 
     const [message, setMessage] = useState('');
 
-    const doLogin = async event =>
+    // // register
+    // const register = async () =>
+    // {
+
+    // }
+    
+    const doLogin = async (event) =>
     {
         event.preventDefault();
 
         alert('doIt()' + loginName.value + ' ' + loginPassword.value);
     };
+
+    const logout = async ()  =>
+    {
+
+    }
 
     return(
         <div id="loginDiv">

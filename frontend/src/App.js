@@ -9,6 +9,7 @@ import './App.css';
 
 import LoginPage from './pages/LoginPage';
 import CssPage from './pages/CssPage';
+import RegisterPage from './pages/RegisterPage';
 
 
 function App()
@@ -18,6 +19,7 @@ function App()
       <Routes>
         <Route exact path="/" element={<LoginPage />} />
         <Route exact path="/car" element={<CssPage />} />
+        <Route exact path="/register" element={<RegisterPage />} />
       </Routes>
     </Router>
   );
