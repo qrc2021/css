@@ -11,7 +11,7 @@ import CssPage from './pages/CssPage';
 import ForgotPage from './pages/ForgotPage';
 import SignupPage from './pages/SignupPage';
 import HomePage from './pages/HomePage';
-
+import PrivateRoute from './components/PrivateRoute';
 
 function App()
 {
@@ -24,7 +24,7 @@ function App()
         <Router>
           <AuthProvider>
             <Routes>
-              <Route exact path="/" element={<HomePage />}/>
+              <Route exact path="/" element={ <PrivateRoute><HomePage /></PrivateRoute>}/>
               <Route path="/register" element={<SignupPage />} />
               <Route path="/login" element={<LoginPage />} />
             </Routes>

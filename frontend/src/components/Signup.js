@@ -1,16 +1,17 @@
 import React, { useRef, useState } from 'react';
 import { Form, Button, Card, Alert } from 'react-bootstrap'
 import { useAuth } from '../contexts/AuthContext'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 export default function Signup() {
   const emailRef = useRef()
   const passwordRef = useRef()
   const passwordConfirmRef = useRef()
-  const serialRef = useRef()
+  // const serialRef = useRef()
   const { signup } = useAuth()
   const [error, setError] = useState("")
   const [loading, setLoading] = useState(false)
+  const nav = useNavigate()
 
   async function handleSubmit(e) {
     e.preventDefault()
@@ -23,6 +24,7 @@ export default function Signup() {
       setError("")
       setLoading(true)
       await signup(emailRef.current.value, passwordRef.current.value)
+      nav("/")
     } catch {
       setError("Failed to create an account")
     }
@@ -42,10 +44,10 @@ export default function Signup() {
               <Form.Label>Email</Form.Label>
               <Form.Control type="email" ref={emailRef} required />
             </Form.Group>
-            <Form.Group id="serial">
+            {/* <Form.Group id="serial">
               <Form.Label>CSS Serial Number</Form.Label>
               <Form.Control type="text" ref={serialRef} required />
-            </Form.Group>
+            </Form.Group> */}
             <Form.Group id="password">
               <Form.Label>Password</Form.Label>
               <Form.Control type="password" ref={passwordRef} required />
