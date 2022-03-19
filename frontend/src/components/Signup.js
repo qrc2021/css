@@ -7,7 +7,7 @@ export default function Signup() {
   const passwordRef = useRef()
   const passwordConfirmRef = useRef()
   const serialRef = useRef()
-  const { signup, currentUser } = useAuth()
+  const { signup } = useAuth()
   const [error, setError] = useState("")
   const [loading, setLoading] = useState(false)
 
@@ -33,7 +33,8 @@ export default function Signup() {
       <Card>
         <Card.Body>
           <h2 className="text-center mb-4">Register</h2>
-          {JSON.stringify(currentUser)}
+          {/* {JSON.stringify(currentUser)} */}
+          {/* {currentUser.email} */}
           {error && <Alert variant="danger">{error}</Alert>}
           <Form onSubmit = {handleSubmit}>
             <Form.Group id="email">
