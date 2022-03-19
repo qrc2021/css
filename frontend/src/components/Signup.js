@@ -7,8 +7,8 @@ export default function Signup() {
   const passwordRef = useRef()
   const passwordConfirmRef = useRef()
   const serialRef = useRef()
-  const { signup } = useAuth()
-  const [error, setError] = useState(" ")
+  const { signup, currentUser } = useAuth()
+  const [error, setError] = useState("")
   const [loading, setLoading] = useState(false)
 
   async function handleSubmit(e) {
@@ -19,7 +19,7 @@ export default function Signup() {
     }
 
     try {
-      setError(" ")
+      setError("")
       setLoading(true)
       await signup(emailRef.current.value, passwordRef.current.value)
     } catch {
@@ -33,6 +33,7 @@ export default function Signup() {
       <Card>
         <Card.Body>
           <h2 className="text-center mb-4">Register</h2>
+          {JSON.stringify(currentUser)}
           {error && <Alert variant="danger">{error}</Alert>}
           <Form onSubmit = {handleSubmit}>
             <Form.Group id="email">
