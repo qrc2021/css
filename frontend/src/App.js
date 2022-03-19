@@ -9,9 +9,8 @@ import { AuthProvider } from './contexts/AuthContext';
 import { Container } from "react-bootstrap";
 import LoginPage from './pages/LoginPage';
 import CssPage from './pages/CssPage';
-import RegisterPage from './pages/RegisterPage';
 import ForgotPage from './pages/ForgotPage';
-import Register from './components/Register';
+import SignupPage from './pages/SignupPage';
 
 
 
@@ -21,7 +20,7 @@ function App()
     
       <Container 
         className="d-flex align-items-center justify-content-center"
-        styple={{ minHeight: "100vh" }}
+        style={{ minHeight: "100vh" }}
         >
         <div className="w-100" style={{ maxWidth: "400px" }}>
           {/* <Router>
@@ -32,7 +31,8 @@ function App()
               <Route exact path="/forgot" element={<ForgotPage />} />
             </Routes>
           </Router> */}
-          <Register />
+          
+          <SignupPage />
         </div>
       </Container>
     

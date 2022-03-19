@@ -1,16 +1,16 @@
 import React from 'react';
 
 import PageHeader from '../components/PageHeader';
-import Register from '../components/Register';
+import Signup from '../components/Signup';
 
-const RegisterPage = () =>
+const SignupPage = () =>
 {
     return(
         <div>
             <PageHeader />
-            <Register />
+            <Signup />
         </div>
     );
 };
 
-export default RegisterPage;
+export default SignupPage;
