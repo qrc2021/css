@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 import { useNavigate } from "react-router-dom";
 import { Button, Card, Form } from 'react-bootstrap';
+import { useAuth } from '../contexts/AuthContext';
 
 
 export default function Register()
@@ -11,6 +12,13 @@ export default function Register()
     const serialRef = useRef();
     const passwordRef = useRef();
     const passwordConfirmRef = useRef();
+    const { register } = useAuth();
+
+    function handleSubmit(e){
+        e.preventDefault()
+
+        register(emailRef.current.value, passwordRef.current.value)
+    }
 
     return(
         <>
