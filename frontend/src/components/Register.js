@@ -5,13 +5,17 @@ import LoginPage from '../pages/LoginPage';
 
 function Register()
 {
-    var rFirstName; // input field persistence
-    var rLastName, rEmail, rPassword, rPasswordVerify, rUnit;
     let navigate = useNavigate();
 
-    const [message, setMessage] = useState('');
+    const [rFirstName, setFirstName] = useState('');
+    const [rLastName, setLastName] = useState('');
+    const [rEmail, setEmail] = useState('');
+    const [rPassword, setPassword] = useState('');
+    const [rPasswordVerify, setVerification] = useState('');
+    const [rUnit, setUnit] = useState('');
 
-    
+
+    // Register 
     const register = async (event) =>
     {
         event.preventDefault();
@@ -30,7 +34,7 @@ function Register()
     return(
         <div id="registerDiv">
             <form onSubmit={register}>
-                <span id="registerResult">{message}</span><br />
+                <span id="registerResult"></span><br />
                 <input type="text" id="rFirstName" placeholder="First Name" ref={(c) => rFirstName = c}/><br />
                 <input type="text" id="rLastName" placeholder="Last Name" ref={(c) => rLastName = c}/><br />
                 <input type="text" id="rEmail" placeholder="Email" ref={(c) => rEmail = c}/><br />

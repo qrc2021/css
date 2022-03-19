@@ -5,12 +5,13 @@ import {
   Navigate,
   Routes
 } from 'react-router-dom';
+import firebase from './firebase';
 import './App.css';
-
 import LoginPage from './pages/LoginPage';
 import CssPage from './pages/CssPage';
 import RegisterPage from './pages/RegisterPage';
 import ForgotPage from './pages/ForgotPage';
+
 
 
 function App()
