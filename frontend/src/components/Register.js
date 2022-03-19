@@ -16,7 +16,7 @@ export default function Register()
         <>
             <Card>
                 <Card.Body>
-                    <h2> Register</h2>
+                    <h2>Register</h2>
                     <Form>
                         <Form.Group id="firstName">
                             <Form.Label>First Name</Form.Label>
@@ -42,7 +42,9 @@ export default function Register()
                             <Form.Label>Confirm Password</Form.Label>
                             <Form.Control type="password" ref={passwordConfirmRef} required />
                         </Form.Group>
-                        <Button className="w-100" type="submit"> Register</Button>
+                        <Button className="w-100" type="submit">
+                            Register
+                        </Button>
                     </Form>
                 </Card.Body>
             </Card>
