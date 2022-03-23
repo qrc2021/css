@@ -25,8 +25,10 @@ function App()
           <AuthProvider>
             <Routes>
               <Route path="/" element={ <PrivateRoute><HomePage /></PrivateRoute> }/>
-              <Route path="/register" element={<SignupPage />} />
-              <Route path="/login" element={<LoginPage />} />
+              <Route path="/register" element={ <SignupPage /> } />
+              <Route path="/login" element={ <LoginPage /> } />
+              <Route path="/forgot" element={ <ForgotPage /> } />
+              <Route path="/update-profile" element={ <UpdatePage />} />
             </Routes>
           </AuthProvider>
         </Router>
