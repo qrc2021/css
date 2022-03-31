@@ -45,7 +45,7 @@ export default function Home() {
     const handleCharacteristicValueChanged = (event) => {
       setBatteryLevel(event.target.value.getUint8(0) + '%');
     }
-  
+    var NORDIC_SERVICE = "6e400001-b5a3-f393-e0a9-e50e24dcca9e";
     /**
      * Attempts to connect to a Bluetooth device and subscribe to
      * battery level readings using the battery service.
@@ -55,7 +55,7 @@ export default function Home() {
         // Search for Bluetooth devices that advertise a battery service
         const device = await navigator.bluetooth
           .requestDevice({
-            filters: [{services: ['battery_service']}]
+            filters: [{services: [NORDIC_SERVICE]}]
           });
   
         setIsDisconnected(false);
@@ -67,7 +67,7 @@ export default function Home() {
         const server = await device.gatt.connect();
   
         // Get the battery service from the Bluetooth device
-        const service = await server.getPrimaryService('battery_service');
+        const service = await server.getPrimaryService(NORDIC_SERVICE);
   
         // Get the battery level characteristic from the Bluetooth device
         const characteristic = await service.getCharacteristic('battery_level');
@@ -83,7 +83,7 @@ export default function Home() {
         const reading = await characteristic.readValue();
   
         // Show the initial reading on the web page
-        setBatteryLevel(reading.getUint8(0) + '%');
+        setBatteryLevel(reading.getUint8() + '%');
       } catch(error) {
         console.log(`There was an error: ${error}`);
       }
