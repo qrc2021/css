@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Card, Button, Alert } from 'react-bootstrap'
+import { Form, Button, Card, Alert, Navbar, Container, Nav } from 'react-bootstrap'
 import { useAuth } from '../contexts/AuthContext'
 import { Link, useNavigate } from 'react-router-dom'
+import"../../src/pretty.css";
 
 export default function Home() {
   const [error, setError] = useState("")
@@ -92,16 +93,39 @@ export default function Home() {
   
   return (
     <>
-      <Card>
-          <Card.Body>
-              <h2 className="text-center mb-4">Profile</h2>
-              {error && <Alert variant="danger">{error}</Alert>}
-              <strong>Email: </strong> {currentUser.email}
-              <Link to="/update" className="btn btn-primary w-100 mt-3">Update Profile</Link>
-          </Card.Body>
-      </Card>
-      <div className='w-100 text-center mt-2'>
-        <Button variant="link" onClick={handleLogout}>Log Out</Button>
+      <Navbar bg="dark" variant="dark">
+            <Container>
+            <Navbar.Brand href="#home">
+            <img
+            alt=""
+            src="/eye.png"
+            width="30"
+            height="30"
+            className="d-inline-block align-top"
+            />{' '}
+            CSS: Car Sentry System
+            </Navbar.Brand>
+
+            <Nav className="navbarScroll">
+              <Button className="btn-secondary"onClick={handleLogout} >Logout</Button>
+            </Nav>
+            </Container>
+      </Navbar>
+      <div className="bg">
+        <Container className="d-flex align-items-center justify-content-center"
+              style={{ minHeight: "100vh" }}>
+          <Card>
+              <Card.Body>
+                  <h2 className="text-center mb-4">Profile</h2>
+                  {error && <Alert variant="danger">{error}</Alert>}
+                  <strong>Email: </strong> {currentUser.email}
+                  <Link to="/update" className="btn btn-primary w-100 mt-3">Update Profile</Link>
+                  <div className='w-100 text-center mt-2'>
+                    <Button variant="link" onClick={handleLogout}>Log Out</Button>
+                  </div>
+              </Card.Body>
+          </Card>
+        </Container>
       </div>
 
       <div className="App">
