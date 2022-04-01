@@ -1,6 +1,4 @@
 import React from 'react';
-
-import PageHeader from '../components/PageHeader';
 import Login from '../components/Login';
 
 const LoginPage = () =>
