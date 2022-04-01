@@ -7,7 +7,6 @@ const SignupPage = () =>
 {
     return(
         <div>
-            <PageHeader />
             <Signup />
         </div>
     );
