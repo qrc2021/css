@@ -7,7 +7,6 @@ const ForgotPage = () =>
 {
     return(
         <div>
-            <PageHeader />
             <Forgot />
         </div>
     );

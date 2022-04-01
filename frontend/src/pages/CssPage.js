@@ -5,7 +5,6 @@ const CssPage = () =>
 {
     return(
         <div>
-            <PageHeader />
             <CssUI />
         </div>
     );

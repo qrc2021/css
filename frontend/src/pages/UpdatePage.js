@@ -7,7 +7,6 @@ const UpdatePage = () =>
 {
     return(
         <div>
-            <PageHeader />
             <Update />
         </div>
     );

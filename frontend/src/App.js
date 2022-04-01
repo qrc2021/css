@@ -16,25 +16,18 @@ import PrivateRoute from './components/PrivateRoute';
 
 function App()
 {
-  return ( 
-    <Container 
-      className="d-flex align-items-center justify-content-center"
-      style={{ minHeight: "100vh" }}
-      >
-      <div className="w-100" style={{ maxWidth: "400px" }}>          
-        <Router>
-          <AuthProvider>
-            <Routes>
-              <Route path="/" element={ <PrivateRoute><HomePage /></PrivateRoute> }/>
-              <Route path="/update" element={ <PrivateRoute><UpdatePage /></PrivateRoute> }/>    
-              <Route path="/register" element={ <SignupPage /> } />
-              <Route path="/login" element={ <LoginPage /> } />
-              <Route path="/forgot" element={ <ForgotPage /> } />
-            </Routes>
-          </AuthProvider>
-        </Router>
-      </div>
-    </Container>
+  return (           
+    <Router>
+      <AuthProvider>
+        <Routes>
+          <Route path="/" element={ <PrivateRoute><HomePage /></PrivateRoute> }/>
+          <Route path="/update" element={ <PrivateRoute><UpdatePage /></PrivateRoute> }/>    
+          <Route path="/register" element={ <SignupPage /> } />
+          <Route path="/login" element={ <LoginPage /> } />
+          <Route path="/forgot" element={ <ForgotPage /> } />
+        </Routes>
+      </AuthProvider>
+    </Router>
   );
 };
 

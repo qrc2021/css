@@ -1,0 +1,31 @@
+.bg {
+    background-image: url("https://wallpaperaccess.com/full/1216690.jpg");
+    height: 100vh;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+.btn-primary {
+    background-color: #454245 !important;
+    border-color: #454245 !important;
+}
+
+.btn-primary:hover {
+    background-color: #2b2a2b !important;
+    border-color: #2b2a2b !important;
+}
+
+.btn-secondary {
+    background-color: #ad0302 !important;
+    border-color: #ad0302 !important;
+}
+
+.btn-secondary:hover {
+    background-color: #690202 !important;
+    border-color: #690202 !important;
+}
+
+p {
+    color: #454245;
+}
