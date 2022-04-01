@@ -30,7 +30,7 @@ export default function Login() {
     <>
       <Navbar bg="dark" variant="dark">
             <Container>
-            <Navbar.Brand href="#home">
+            <Navbar.Brand href="/login">
             <img
             alt=""
             src="/eye.png"
@@ -38,7 +38,7 @@ export default function Login() {
             height="30"
             className="d-inline-block align-top"
             />{' '}
-            CSS: Car Sentry System
+            CSS
             </Navbar.Brand>
             </Container>
       </Navbar>

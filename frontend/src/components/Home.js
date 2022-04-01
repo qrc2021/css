@@ -95,7 +95,7 @@ export default function Home() {
     <>
       <Navbar bg="dark" variant="dark">
             <Container>
-            <Navbar.Brand href="#home">
+            <Navbar.Brand href="/">
             <img
             alt=""
             src="/eye.png"
@@ -103,12 +103,14 @@ export default function Home() {
             height="30"
             className="d-inline-block align-top"
             />{' '}
-            CSS: Car Sentry System
+            CSS
             </Navbar.Brand>
-
-            <Nav className="navbarScroll">
-              <Button className="btn-secondary"onClick={handleLogout} >Logout</Button>
-            </Nav>
+              <Nav className="me-auto">
+                <Nav.Link href="/update">Update Profile</Nav.Link>
+              </Nav>
+              <Nav className="navbarScroll">
+                <Button className="btn-secondary"onClick={handleLogout} >Logout</Button>
+              </Nav>
             </Container>
       </Navbar>
       <div className="bg">
@@ -119,27 +121,22 @@ export default function Home() {
                   <h2 className="text-center mb-4">Profile</h2>
                   {error && <Alert variant="danger">{error}</Alert>}
                   <strong>Email: </strong> {currentUser.email}
-                  <Link to="/update" className="btn btn-primary w-100 mt-3">Update Profile</Link>
-                  <div className='w-100 text-center mt-2'>
-                    <Button variant="link" onClick={handleLogout}>Log Out</Button>
-                  </div>
+                  <div className="App">
+                  <h3>Get Device Battery Info Over Bluetooth</h3>
+                  {supportsBluetooth && !isDisconnected &&
+                        <p>Battery level: {batteryLevel}</p>
+                  }
+                  {supportsBluetooth && isDisconnected &&
+                    <Button onClick={connectToDeviceAndSubscribeToUpdates}>Connect Bluetooth Device</Button>
+                  }
+                  {!supportsBluetooth &&
+                    <p>This browser doesn't support the Web Bluetooth API</p>
+                  }
+                </div>
               </Card.Body>
           </Card>
         </Container>
       </div>
-
-      <div className="App">
-      <h1>Get Device Battery Info Over Bluetooth</h1>
-      {supportsBluetooth && !isDisconnected &&
-            <p>Battery level: {batteryLevel}</p>
-      }
-      {supportsBluetooth && isDisconnected &&
-        <button onClick={connectToDeviceAndSubscribeToUpdates}>Connect to a Bluetooth device</button>
-      }
-      {!supportsBluetooth &&
-        <p>This browser doesn't support the Web Bluetooth API</p>
-      }
-    </div>
 
     </>
   );
