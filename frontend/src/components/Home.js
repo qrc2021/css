@@ -4,6 +4,7 @@ import { useAuth } from '../contexts/AuthContext'
 import { Link, useNavigate } from 'react-router-dom'
 import"../../src/pretty.css";
 
+
 export default function Home() {
   const [error, setError] = useState("")
   const { currentUser, logout } = useAuth()
@@ -44,9 +45,12 @@ export default function Home() {
      * received.
      */
     const handleCharacteristicValueChanged = (event) => {
-      setBatteryLevel(event.target.value.getUint8(0) + '%');
+      setBatteryLevel(event.target.value.getUint8(0) + '%'); // CHANGE
     }
+    // Connect to nordic bluetooth
     var NORDIC_SERVICE = "6e400001-b5a3-f393-e0a9-e50e24dcca9e";
+    // Get data from bluetooth
+    var NORDIC_CHAR = "6e400002-b5a3-f393-e0a9-e50e24dcca9e";
     /**
      * Attempts to connect to a Bluetooth device and subscribe to
      * battery level readings using the battery service.
@@ -71,7 +75,7 @@ export default function Home() {
         const service = await server.getPrimaryService(NORDIC_SERVICE);
   
         // Get the battery level characteristic from the Bluetooth device
-        const characteristic = await service.getCharacteristic('battery_level');
+        const characteristic = await service.getCharacteristic(NORDIC_CHAR);
   
         // Subscribe to battery level notifications
         characteristic.startNotifications();
@@ -84,7 +88,7 @@ export default function Home() {
         const reading = await characteristic.readValue();
   
         // Show the initial reading on the web page
-        setBatteryLevel(reading.getUint8() + '%');
+        setBatteryLevel(reading.getUint8() + '%'); // CHANGE
       } catch(error) {
         console.log(`There was an error: ${error}`);
       }
