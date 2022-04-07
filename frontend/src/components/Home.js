@@ -40,17 +40,21 @@ export default function Home() {
       setIsDisconnected(true);
     }
   
+    // UFT STUFF
+    let encoder = new TextEncoder();
     /**
      * Update the value shown on the web page when a notification is
      * received.
      */
     const handleCharacteristicValueChanged = (event) => {
-      setBatteryLevel(event.target.value.getUint8(0) + '%'); // CHANGE
+      let val = event.target.value;
+      setBatteryLevel(new TextDecoder().decode(val)); // CHANGE
     }
     // Connect to nordic bluetooth
     var NORDIC_SERVICE = "6e400001-b5a3-f393-e0a9-e50e24dcca9e";
     // Get data from bluetooth
-    var NORDIC_CHAR = "6e400002-b5a3-f393-e0a9-e50e24dcca9e";
+    var NORDIC_CHAR = "6e400003-b5a3-f393-e0a9-e50e24dcca9e";
+
     /**
      * Attempts to connect to a Bluetooth device and subscribe to
      * battery level readings using the battery service.
@@ -85,10 +89,10 @@ export default function Home() {
                                     handleCharacteristicValueChanged);
         
         // Read the battery level value
-        const reading = await characteristic.readValue();
+        const reading = await characteristic.readString();
   
         // Show the initial reading on the web page
-        setBatteryLevel(reading.getUint8() + '%'); // CHANGE
+        setBatteryLevel(reading.getStringValue(encoder)); // CHANGE
       } catch(error) {
         console.log(`There was an error: ${error}`);
       }
@@ -128,7 +132,7 @@ export default function Home() {
                   <div className="App">
                   <h3>Get Device Battery Info Over Bluetooth</h3>
                   {supportsBluetooth && !isDisconnected &&
-                        <p>Battery level: {batteryLevel}</p>
+                        <p>String: {batteryLevel}</p>
                   }
                   {supportsBluetooth && isDisconnected &&
                     <Button onClick={connectToDeviceAndSubscribeToUpdates}>Connect Bluetooth Device</Button>
