@@ -13,6 +13,14 @@ export default function Home() {
   const [supportsBluetooth, setSupportsBluetooth] = useState(false);
   const [isDisconnected, setIsDisconnected] = useState(true);
   const [batteryLevel, setBatteryLevel] = useState(null);
+  const [fullDate, setFullDate] = useState(null);
+  // Getting date & time
+  const currentDate = new Date();
+  const day = currentDate.getDate();
+  const month = currentDate.getMonth();
+  const year = currentDate.getFullYear();
+  const time = currentDate.toLocaleTimeString();
+  let entireDate = (month + 1) + "-" + day + "-" + year + "  |  " + time;
 
   async function handleLogout() {
     setError("")
@@ -49,6 +57,7 @@ export default function Home() {
     const handleCharacteristicValueChanged = (event) => {
       let val = event.target.value;
       setBatteryLevel(new TextDecoder().decode(val)); // CHANGE
+      setFullDate(entireDate);
     }
     // Connect to nordic bluetooth
     var NORDIC_SERVICE = "6e400001-b5a3-f393-e0a9-e50e24dcca9e";
@@ -93,6 +102,7 @@ export default function Home() {
   
         // Show the initial reading on the web page
         setBatteryLevel(reading.getStringValue(encoder)); // CHANGE
+        setFullDate(entireDate);
       } catch(error) {
         console.log(`There was an error: ${error}`);
       }
@@ -132,7 +142,7 @@ export default function Home() {
                   <div className="App">
                   <h3>Get Device Battery Info Over Bluetooth</h3>
                   {supportsBluetooth && !isDisconnected &&
-                        <p>String: {batteryLevel}</p>
+                        <p>String: {batteryLevel} <br /> {fullDate}</p>
                   }
                   {supportsBluetooth && isDisconnected &&
                     <Button onClick={connectToDeviceAndSubscribeToUpdates}>Connect Bluetooth Device</Button>
