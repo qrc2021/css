@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Form, Button, Card, Alert, Navbar, Container, Nav } from 'react-bootstrap'
-import { useAuth } from '../contexts/AuthContext'
-import { Link, useNavigate } from 'react-router-dom'
+import { Form, Button, Card, Alert, Navbar, Container, Nav } from 'react-bootstrap';
+import { useAuth } from '../contexts/AuthContext';
+import { Link, useNavigate } from 'react-router-dom';
 import"../../src/pretty.css";
+import { db } from "../firebase";
+import { collection, addDoc } from "firebase/firestore";
 
 
 export default function Home() {
@@ -68,8 +70,9 @@ export default function Home() {
      * Attempts to connect to a Bluetooth device and subscribe to
      * battery level readings using the battery service.
      */
-    const connectToDeviceAndSubscribeToUpdates = async () => {
+    const connectToDeviceAndSubscribeToUpdates = async (ev) => {
       try {
+        ev.preventDefault();
         // Search for Bluetooth devices that advertise a battery service
         const device = await navigator.bluetooth
           .requestDevice({
@@ -103,6 +106,13 @@ export default function Home() {
         // Show the initial reading on the web page
         setBatteryLevel(reading.getStringValue(encoder)); // CHANGE
         setFullDate(entireDate);
+
+        await addDoc(collection(db, "plates"), {
+          batteryLevel,
+          time: fullDate,
+        });
+          setBatteryLevel("");
+        
       } catch(error) {
         console.log(`There was an error: ${error}`);
       }
