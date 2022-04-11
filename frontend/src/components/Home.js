@@ -17,13 +17,9 @@ export default function Home() {
   const [batteryLevel, setBatteryLevel] = useState(null);
   const [fullDate, setFullDate] = useState(null);
   // Getting date & time
-  const currentDate = new Date();
-  const day = currentDate.getDate();
-  const month = currentDate.getMonth();
-  const year = currentDate.getFullYear();
-  const time = currentDate.toLocaleTimeString();
-  let entireDate = (month + 1) + "-" + day + "-" + year + "  |  " + time;
+  var currentDate = new Date().toLocaleString();
 
+  // FUNCT
   async function handleLogout() {
     setError("")
     try{
@@ -59,7 +55,12 @@ export default function Home() {
     const handleCharacteristicValueChanged = (event) => {
       let val = event.target.value;
       setBatteryLevel(new TextDecoder().decode(val)); // CHANGE
-      setFullDate(entireDate);
+      setFullDate(currentDate);
+      // TRYING TO ADD
+       addDoc(collection(db, "plates"), {
+        license: new TextDecoder().decode(val),
+        time: currentDate,
+      });
     }
     // Connect to nordic bluetooth
     var NORDIC_SERVICE = "6e400001-b5a3-f393-e0a9-e50e24dcca9e";
@@ -87,10 +88,10 @@ export default function Home() {
         // Try to connect to the remote GATT Server running on the Bluetooth device
         const server = await device.gatt.connect();
   
-        // Get the battery service from the Bluetooth device
+        // Get the nordic service from the Bluetooth device
         const service = await server.getPrimaryService(NORDIC_SERVICE);
   
-        // Get the battery level characteristic from the Bluetooth device
+        // Get the transmission characteristic from the Bluetooth device
         const characteristic = await service.getCharacteristic(NORDIC_CHAR);
   
         // Subscribe to battery level notifications
@@ -102,16 +103,10 @@ export default function Home() {
         
         // Read the battery level value
         const reading = await characteristic.readString();
-  
+        
         // Show the initial reading on the web page
         setBatteryLevel(reading.getStringValue(encoder)); // CHANGE
-        setFullDate(entireDate);
-
-        await addDoc(collection(db, "plates"), {
-          batteryLevel,
-          time: fullDate,
-        });
-          setBatteryLevel("");
+        setFullDate(currentDate);
         
       } catch(error) {
         console.log(`There was an error: ${error}`);
