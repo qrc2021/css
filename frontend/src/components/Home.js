@@ -4,7 +4,7 @@ import { useAuth } from '../contexts/AuthContext';
 import { Link, useNavigate } from 'react-router-dom';
 import"../../src/pretty.css";
 import { db } from "../firebase";
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, getDoc, QuerySnapshot, getDocs } from "firebase/firestore";
 
 
 export default function Home() {
@@ -18,6 +18,7 @@ export default function Home() {
   const [fullDate, setFullDate] = useState(null);
   // Getting date & time
   var currentDate = new Date().toLocaleString();
+  const formData = document.querySelector(".form-data");
 
   // FUNCT
   async function handleLogout() {
@@ -56,11 +57,32 @@ export default function Home() {
       let val = event.target.value;
       setBatteryLevel(new TextDecoder().decode(val)); // CHANGE
       setFullDate(currentDate);
-      // TRYING TO ADD
+      // ADDING TO FIRESTORE
        addDoc(collection(db, "plates"), {
         license: new TextDecoder().decode(val),
         time: currentDate,
       });
+      
+      function createFormData(doc) {
+        let div = document.createElement('DIV');
+        let license = document.createElement('span');
+        let time = document.createElement('span');
+        div.classList.add("form-info");
+        license.textContent = doc.data().license;
+        time.textContent = doc.data().time;
+
+        div.appendChild(license);
+        div.appendChild(time);
+
+        formData.appendChild(div);
+      }
+
+      // GETTING FROM FIRESTORE
+      getDocs(collection(db,"plates")).then((snapshot) => {
+          snapshot.forEach((doc) => {
+            createFormData(doc);
+          })
+      })
     }
     // Connect to nordic bluetooth
     var NORDIC_SERVICE = "6e400001-b5a3-f393-e0a9-e50e24dcca9e";
@@ -113,6 +135,7 @@ export default function Home() {
       }
     };
 
+
   
   return (
     <>
@@ -131,20 +154,23 @@ export default function Home() {
               <Nav className="me-auto">
                 <Nav.Link href="/update">Update Profile</Nav.Link>
               </Nav>
+              
+                {/* {supportsBluetooth && !isDisconnected &&
+                          <p>String: {batteryLevel} <br /> {fullDate}</p>
+                } */}
+                {supportsBluetooth && isDisconnected &&
+                  <Button onClick={connectToDeviceAndSubscribeToUpdates}>Connect Bluetooth Device</Button>
+                }
+                {!supportsBluetooth &&
+                  <p>This browser doesn't support the Web Bluetooth API</p>
+                }
+              
               <Nav className="navbarScroll">
-                <Button className="btn-secondary"onClick={handleLogout} >Logout</Button>
+                <Button className=" mx-3 btn-secondary"onClick={handleLogout} >Logout</Button>
               </Nav>
-            </Container>
-      </Navbar>
-      <div className="bg">
-        <Container className="d-flex align-items-center justify-content-center"
-              style={{ minHeight: "100vh" }}>
-          <Card>
-              <Card.Body>
-                  <h2 className="text-center mb-4">Profile</h2>
-                  {error && <Alert variant="danger">{error}</Alert>}
-                  <strong>Email: </strong> {currentUser.email}
-                  <div className="App">
+              
+
+              {/* <div className="App">
                   <h3>Get Device Battery Info Over Bluetooth</h3>
                   {supportsBluetooth && !isDisconnected &&
                         <p>String: {batteryLevel} <br /> {fullDate}</p>
@@ -155,7 +181,29 @@ export default function Home() {
                   {!supportsBluetooth &&
                     <p>This browser doesn't support the Web Bluetooth API</p>
                   }
-                </div>
+                </div> */}
+
+            </Container>
+      </Navbar>
+      <div className="bg">
+        <Container className="d-flex align-items-center justify-content-center"
+              style={{ minHeight: "100vh" }}>
+          <Card>
+              <Card.Body>
+                  
+                    <div className="form-submissions">
+                      <h2>Detected Plates</h2>
+                      <div className="form-container">
+                        <div className="form-data">
+                          <div className="form-titles">
+                            <h4>License:</h4>
+                            <h4>Time:</h4>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  
+      
               </Card.Body>
           </Card>
         </Container>
