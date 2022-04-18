@@ -58,7 +58,7 @@ export default function Home() {
       setBatteryLevel(new TextDecoder().decode(val)); // CHANGE
       setFullDate(currentDate);
       // ADDING TO FIRESTORE
-       addDoc(collection(db, "plates"), {
+       addDoc(collection(db, "platesTEST"), {
         license: new TextDecoder().decode(val),
         time: currentDate,
       });
@@ -78,7 +78,7 @@ export default function Home() {
       }
 
       // GETTING FROM FIRESTORE
-      getDocs(collection(db,"plates").orderBy('time')).then((snapshot) => {
+      getDocs(collection(db,"platesTEST").orderBy('time')).then((snapshot) => {
           snapshot.forEach((doc) => {
             createFormData(doc);
           })
