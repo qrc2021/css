@@ -78,7 +78,7 @@ export default function Home() {
       }
 
       // GETTING FROM FIRESTORE
-      getDocs(collection(db,"plates")).then((snapshot) => {
+      getDocs(collection(db,"plates").orderBy('time')).then((snapshot) => {
           snapshot.forEach((doc) => {
             createFormData(doc);
           })
@@ -159,7 +159,7 @@ export default function Home() {
                           <p>String: {batteryLevel} <br /> {fullDate}</p>
                 } */}
                 {supportsBluetooth && isDisconnected &&
-                  <Button onClick={connectToDeviceAndSubscribeToUpdates}>Connect Bluetooth Device</Button>
+                  <Button onClick={connectToDeviceAndSubscribeToUpdates}>Connect CSS Unit</Button>
                 }
                 {!supportsBluetooth &&
                   <p>This browser doesn't support the Web Bluetooth API</p>
