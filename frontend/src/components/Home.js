@@ -78,7 +78,7 @@ export default function Home() {
       }
 
       // GETTING FROM FIRESTORE
-      getDocs(collection(db,"platesTEST").orderBy('time')).then((snapshot) => {
+      getDocs(collection(db,"platesTEST")).then((snapshot) => {
           snapshot.forEach((doc) => {
             createFormData(doc);
           })
